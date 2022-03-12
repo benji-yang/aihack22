@@ -21,3 +21,13 @@ print(system_data.head(5))
 plt.plot(epex_data['timestamp'], epex_data['apx_da_hourly'])
 plt.show()
 # %%
+day = 48
+week = 336
+
+mi=-337
+ma=mi + week 
+data = epex_data[mi:ma]
+
+# %%
+plt.plot(data['timestamp'], data['apx_da_hourly'])
+# %%
