@@ -22,10 +22,10 @@ for i in range(1, len(epex_data['timestamp'])):
     new_date = epex_date[i-1] + delta_t
     epex_date.append(new_date)
 
-
 #%%
 #Group by date
-epex_data['day'] = epex_date
+epex_data['Date'] = epex_date
+# epex_data.set_index("Date",inplace=True)
 #%%
 # Analyzed data
 print(epex_data.head(5))
@@ -33,8 +33,9 @@ print(spot_data.head(5))
 print(system_data.head(5))
 #%%
 # Plot data
-epex_date.groupby(pd.Grouper(key = epex_date, freq = '7D').sum())
-plt.plot(epex_data['timestamp'], epex_data['apx_da_hourly'])
+mean_data = epex_data.groupby(pd.Grouper(key = 'Date', freq = '7D')).mean()
+#%%
+plt.plot(mean_data['Date'],mean_data['apx_da_hourly'])
 plt.show()
 # %%
 day = 48
